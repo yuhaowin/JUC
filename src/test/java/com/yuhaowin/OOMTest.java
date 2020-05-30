@@ -1,4 +1,4 @@
-package com.yuhaowin.test;
+package com.yuhaowin;
 
 public class OOMTest {
 
