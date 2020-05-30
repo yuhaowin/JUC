@@ -132,7 +132,7 @@ try {
 ## 使用Lamda表达式
 
 ```java
-package com.mashibing.disruptor;
+package com.yuhaowin.disruptor;
 
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;
