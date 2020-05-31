@@ -10,7 +10,7 @@
 
 1. 创建Maven项目，添加依赖
 
-   ```java
+   ```
    <?xml version="1.0" encoding="UTF-8"?>
    <project xmlns="http://maven.apache.org/POM/4.0.0"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -112,7 +112,7 @@
 
 6. 运行测试类，如果遇到下面的错误：
 
-   ```java
+   ```
    ERROR: org.openjdk.jmh.runner.RunnerException: ERROR: Exception while trying to acquire the JMH lock (C:\WINDOWS\/jmh.lock): C:\WINDOWS\jmh.lock (拒绝访问。), exiting. Use -Djmh.ignoreLock=true to forcefully continue.
    	at org.openjdk.jmh.runner.Runner.run(Runner.java:216)
    	at org.openjdk.jmh.Main.main(Main.java:71)

@@ -1,6 +1,4 @@
-/*
-Condition本质是锁资源上不同的等待队列
- */
+
 package com.yuhaowin.juc.c26_00_interview.A1B2C3;
 
 
@@ -8,6 +6,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/*
+ *Condition本质是锁资源上不同的等待队列
+ */
 public class T09_00_lock_condition {
 
     public static void main(String[] args) {
@@ -19,11 +20,11 @@ public class T09_00_lock_condition {
         Condition conditionT1 = lock.newCondition();
         Condition conditionT2 = lock.newCondition();
 
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 lock.lock();
 
-                for(char c : aI) {
+                for (char c : aI) {
                     System.out.print(c);
                     conditionT2.signal();
                     conditionT1.await();
@@ -39,11 +40,11 @@ public class T09_00_lock_condition {
 
         }, "t1").start();
 
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 lock.lock();
 
-                for(char c : aC) {
+                for (char c : aC) {
                     System.out.print(c);
                     conditionT1.signal();
                     conditionT2.await();

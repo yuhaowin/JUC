@@ -1,14 +1,10 @@
 package com.yuhaowin.juc.c26_00_interview.A1B2C3;
 
-
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
 public class T10_00_PipedStream {
-
-
-
 
     public static void main(String[] args) throws Exception {
         char[] aI = "1234567".toCharArray();
@@ -24,17 +20,15 @@ public class T10_00_PipedStream {
 
         String msg = "Your Turn";
 
-
-
         new Thread(() -> {
 
             byte[] buffer = new byte[9];
 
             try {
-                for(char c : aI) {
+                for (char c : aI) {
                     input1.read(buffer);
 
-                    if(new String(buffer).equals(msg)) {
+                    if (new String(buffer).equals(msg)) {
                         System.out.print(c);
                     }
 
@@ -52,7 +46,7 @@ public class T10_00_PipedStream {
             byte[] buffer = new byte[9];
 
             try {
-                for(char c : aC) {
+                for (char c : aC) {
 
                     System.out.print(c);
 
@@ -60,7 +54,7 @@ public class T10_00_PipedStream {
 
                     input2.read(buffer);
 
-                    if(new String(buffer).equals(msg)) {
+                    if (new String(buffer).equals(msg)) {
                         continue;
                     }
                 }

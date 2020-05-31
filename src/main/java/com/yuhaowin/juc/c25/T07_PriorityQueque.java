@@ -4,16 +4,16 @@ import java.util.PriorityQueue;
 
 public class T07_PriorityQueque {
     public static void main(String[] args) {
-        PriorityQueue<String> q = new PriorityQueue<>();
+        PriorityQueue<String> queue = new PriorityQueue<>();
 
-        q.add("c");
-        q.add("e");
-        q.add("a");
-        q.add("d");
-        q.add("z");
+        queue.add("c");
+        queue.add("e");
+        queue.add("a");
+        queue.add("d");
+        queue.add("z");
 
         for (int i = 0; i < 5; i++) {
-            System.out.println(q.poll());
+            System.out.println(queue.poll());
         }
 
     }

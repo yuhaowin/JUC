@@ -58,7 +58,7 @@ RingBuffer的序号，指向下一个可用的元素
 
 ## 事件发布模板
 
-```java
+```
 long sequence = ringBuffer.next();  // Grab the next sequence
 try {
     LongEvent event = ringBuffer.get(sequence); // Get the entry in the Disruptor
@@ -71,7 +71,7 @@ try {
 
 ## 使用EventTranslator发布事件
 
-```java
+```
 //===============================================================
         EventTranslator<LongEvent> translator1 = new EventTranslator<LongEvent>() {
             @Override

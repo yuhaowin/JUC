@@ -16,7 +16,7 @@ LinkedList
 Collections.synchronizedXXX
 CopyOnWriteList
 Queue
-	CocurrentLinkedQueue //concurrentArrayQueue
+	ConcurrentLinkedQueue
 	BlockingQueue
 		LinkedBQ
 		ArrayBQ

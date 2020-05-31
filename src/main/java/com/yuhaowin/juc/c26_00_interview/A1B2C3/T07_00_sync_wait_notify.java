@@ -1,6 +1,5 @@
 package com.yuhaowin.juc.c26_00_interview.A1B2C3;
 
-
 public class T07_00_sync_wait_notify {
 
     private static volatile boolean t2Started = false;
@@ -11,16 +10,15 @@ public class T07_00_sync_wait_notify {
         final Object o = new Object();
 
 
-
         char[] aI = "1234567".toCharArray();
         char[] aC = "ABCDEFG".toCharArray();
 
-        new Thread(()->{
+        new Thread(() -> {
             //latch.await();
 
             synchronized (o) {
 
-                while(!t2Started) {
+                while (!t2Started) {
                     try {
                         o.wait();
                     } catch (InterruptedException e) {
@@ -30,7 +28,7 @@ public class T07_00_sync_wait_notify {
 
                 //
 
-                for(char c : aI) {
+                for (char c : aI) {
                     System.out.print(c);
                     try {
                         o.notify();
@@ -44,10 +42,10 @@ public class T07_00_sync_wait_notify {
             }
         }, "t1").start();
 
-        new Thread(()->{
+        new Thread(() -> {
 
             synchronized (o) {
-                for(char c : aC) {
+                for (char c : aC) {
                     System.out.print(c);
                     //latch.countDown()
                     t2Started = true;

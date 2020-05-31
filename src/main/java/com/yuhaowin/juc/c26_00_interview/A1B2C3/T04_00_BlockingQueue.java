@@ -16,7 +16,7 @@ public class T04_00_BlockingQueue {
 
         new Thread(() -> {
 
-            for(char c : aI) {
+            for (char c : aI) {
                 System.out.print(c);
                 try {
                     q1.put("ok");
@@ -30,7 +30,7 @@ public class T04_00_BlockingQueue {
 
         new Thread(() -> {
 
-            for(char c : aC) {
+            for (char c : aC) {
                 try {
                     q1.take();
                 } catch (InterruptedException e) {
@@ -45,7 +45,6 @@ public class T04_00_BlockingQueue {
             }
 
         }, "t2").start();
-
 
     }
 }
