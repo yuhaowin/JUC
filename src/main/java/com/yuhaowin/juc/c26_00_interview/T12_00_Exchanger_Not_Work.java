@@ -1,4 +1,4 @@
-package com.yuhaowin.juc.c26_00_interview.A1B2C3;
+package com.yuhaowin.juc.c26_00_interview;
 
 import java.util.concurrent.Exchanger;
 

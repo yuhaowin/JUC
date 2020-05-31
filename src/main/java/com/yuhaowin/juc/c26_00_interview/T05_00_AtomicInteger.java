@@ -1,24 +1,26 @@
-package com.yuhaowin.juc.c26_00_interview.A1B2C3;
+package com.yuhaowin.juc.c26_00_interview;
 
 
-public class T03_00_cas {
+import java.util.concurrent.atomic.AtomicInteger;
 
-    enum ReadyToRun {T1, T2}
+public class T05_00_AtomicInteger {
 
-    static volatile ReadyToRun r = ReadyToRun.T1; //思考为什么必须volatile
+    static AtomicInteger threadNo = new AtomicInteger(1);
+
 
     public static void main(String[] args) {
 
         char[] aI = "1234567".toCharArray();
         char[] aC = "ABCDEFG".toCharArray();
 
+
         new Thread(() -> {
 
             for (char c : aI) {
-                while (r != ReadyToRun.T1) {
+                while (threadNo.get() != 1) {
                 }
                 System.out.print(c);
-                r = ReadyToRun.T2;
+                threadNo.set(2);
             }
 
         }, "t1").start();
@@ -26,10 +28,10 @@ public class T03_00_cas {
         new Thread(() -> {
 
             for (char c : aC) {
-                while (r != ReadyToRun.T2) {
+                while (threadNo.get() != 2) {
                 }
                 System.out.print(c);
-                r = ReadyToRun.T1;
+                threadNo.set(1);
             }
         }, "t2").start();
     }

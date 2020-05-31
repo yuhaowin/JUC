@@ -1,15 +1,10 @@
-
-package com.yuhaowin.juc.c26_00_interview.A1B2C3;
-
+package com.yuhaowin.juc.c26_00_interview;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/*
- *Condition本质是锁资源上不同的等待队列
- */
-public class T09_00_lock_condition {
+public class T08_00_lock_condition {
 
     public static void main(String[] args) {
 
@@ -17,8 +12,7 @@ public class T09_00_lock_condition {
         char[] aC = "ABCDEFG".toCharArray();
 
         Lock lock = new ReentrantLock();
-        Condition conditionT1 = lock.newCondition();
-        Condition conditionT2 = lock.newCondition();
+        Condition condition = lock.newCondition();
 
         new Thread(() -> {
             try {
@@ -26,11 +20,11 @@ public class T09_00_lock_condition {
 
                 for (char c : aI) {
                     System.out.print(c);
-                    conditionT2.signal();
-                    conditionT1.await();
+                    condition.signal();
+                    condition.await();
                 }
 
-                conditionT2.signal();
+                condition.signal();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -46,11 +40,11 @@ public class T09_00_lock_condition {
 
                 for (char c : aC) {
                     System.out.print(c);
-                    conditionT1.signal();
-                    conditionT2.await();
+                    condition.signal();
+                    condition.await();
                 }
 
-                conditionT1.signal();
+                condition.signal();
 
             } catch (Exception e) {
                 e.printStackTrace();

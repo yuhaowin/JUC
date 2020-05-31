@@ -1,33 +1,34 @@
-package com.yuhaowin.juc.c26_00_interview.A1B2C3;
+package com.yuhaowin.juc.c26_00_interview;
 
+public class T07_00_sync_wait_notify {
 
-public class T06_00_sync_wait_notify {
+    private static volatile boolean t2Started = false;
+
+    //private static CountDownLatch latch = new C(1);
+
     public static void main(String[] args) {
         final Object o = new Object();
+
 
         char[] aI = "1234567".toCharArray();
         char[] aC = "ABCDEFG".toCharArray();
 
         new Thread(() -> {
+            //latch.await();
+
             synchronized (o) {
-                for (char c : aI) {
-                    System.out.print(c);
+
+                while (!t2Started) {
                     try {
-                        o.notify();
-                        o.wait(); //让出锁
+                        o.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
 
-                o.notify(); //必须，否则无法停止程序
-            }
+                //
 
-        }, "t1").start();
-
-        new Thread(() -> {
-            synchronized (o) {
-                for (char c : aC) {
+                for (char c : aI) {
                     System.out.print(c);
                     try {
                         o.notify();
@@ -39,8 +40,26 @@ public class T06_00_sync_wait_notify {
 
                 o.notify();
             }
+        }, "t1").start();
+
+        new Thread(() -> {
+
+            synchronized (o) {
+                for (char c : aC) {
+                    System.out.print(c);
+                    //latch.countDown()
+                    t2Started = true;
+                    try {
+                        o.notify();
+                        o.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                o.notify();
+            }
         }, "t2").start();
     }
 }
 
-//如果我想保证t2在t1之前打印，也就是说保证首先输出的是A而不是1，这个时候该如何做？
+
