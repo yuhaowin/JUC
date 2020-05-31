@@ -17,39 +17,41 @@ public class T05_HelloThreadPool {
 
         @Override
         public void run() {
-            System.out.println(Thread.currentThread().getName() + " Task " + i);
-            try {
-                System.in.read();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //System.out.println(Thread.currentThread().getName() + " Task " + i);
+//            try {
+//                //System.in.read();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
 
         @Override
         public String toString() {
-            return "Task{" +
-                    "i=" + i +
-                    '}';
+            return "Task{" + "i=" + i + '}';
         }
     }
 
     public static void main(String[] args) {
-        ThreadPoolExecutor tpe = new ThreadPoolExecutor(2, 4,
-                60, TimeUnit.SECONDS,
-                new ArrayBlockingQueue<Runnable>(4),
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                2,
+                4,
+                60,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(4),
                 Executors.defaultThreadFactory(),
-                new ThreadPoolExecutor.CallerRunsPolicy());
+                new ThreadPoolExecutor.CallerRunsPolicy()
+        );
 
-        for (int i = 0; i < 8; i++) {
-            tpe.execute(new Task(i));
+        for (int i = 0; i < 10; i++) {
+            executor.execute(new Task(i));
         }
 
-        System.out.println(tpe.getQueue());
+        System.out.println(executor.getQueue());
 
-        tpe.execute(new Task(100));
+        //executor.execute(new Task(100));
 
-        System.out.println(tpe.getQueue());
+        System.out.println(executor.getQueue());
 
-        tpe.shutdown();
+        executor.shutdown();
     }
 }

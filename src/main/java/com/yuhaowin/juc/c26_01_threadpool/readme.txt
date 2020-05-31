@@ -7,6 +7,6 @@ Future
 
 fixed cached single scheduled workstealing forkjoin
 
-ThreadpoolExecutor
+ThreadPoolExecutor
 
 PStreamAPI
