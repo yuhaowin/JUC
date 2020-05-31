@@ -2,7 +2,7 @@
 
 ### 1、常用变量的解释
 
-```java
+```
 // 1. `ctl`，可以看做一个int类型的数字，高3位表示线程池状态，低29位表示worker数量
 private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 // 2. `COUNT_BITS`，`Integer.SIZE`为32，所以`COUNT_BITS`为29
@@ -42,7 +42,7 @@ private static boolean runStateAtLeast(int c, int s) {
 
 ### 2、构造方法
 
-```java
+```
 public ThreadPoolExecutor(int corePoolSize,
                           int maximumPoolSize,
                           long keepAliveTime,
@@ -71,7 +71,7 @@ public ThreadPoolExecutor(int corePoolSize,
 
 ### 3、提交执行task的过程
 
-```java
+```
 public void execute(Runnable command) {
     if (command == null)
         throw new NullPointerException();
@@ -125,7 +125,7 @@ public void execute(Runnable command) {
 
 ### 4、addworker源码解析
 
-```java
+```
 private boolean addWorker(Runnable firstTask, boolean core) {
     retry:
     // 外层自旋
@@ -256,7 +256,7 @@ private final class Worker
 
 ### 6、核心线程执行逻辑-runworker
 
-```java
+```
 final void runWorker(Worker w) {
     Thread wt = Thread.currentThread();
     Runnable task = w.firstTask;

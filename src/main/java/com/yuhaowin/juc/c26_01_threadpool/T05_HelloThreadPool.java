@@ -1,9 +1,12 @@
 package com.yuhaowin.juc.c26_01_threadpool;
 
 import java.io.IOException;
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
-public class T05_00_HelloThreadPool {
+public class T05_HelloThreadPool {
 
     static class Task implements Runnable {
         private int i;

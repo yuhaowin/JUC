@@ -1,9 +1,3 @@
-/**
- * 假设你能够提供一个服务
- * 这个服务查询各大电商网站同一类产品的价格并汇总展示
- * @author 马士兵 http://mashibing.com
- */
-
 package com.yuhaowin.juc.c26_01_threadpool;
 
 import java.io.IOException;
@@ -12,7 +6,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class T06_01_CompletableFuture {
+/**
+ * 假设你能够提供一个服务
+ * 这个服务查询各大电商网站同一类产品的价格并汇总展示
+ */
+
+public class T04_CompletableFuture {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         long start, end;
 
@@ -27,15 +26,15 @@ public class T06_01_CompletableFuture {
 
         start = System.currentTimeMillis();
 
-        CompletableFuture<Double> futureTM = CompletableFuture.supplyAsync(()->priceOfTM());
-        CompletableFuture<Double> futureTB = CompletableFuture.supplyAsync(()->priceOfTB());
-        CompletableFuture<Double> futureJD = CompletableFuture.supplyAsync(()->priceOfJD());
+        CompletableFuture<Double> futureTM = CompletableFuture.supplyAsync(() -> priceOfTM());
+        CompletableFuture<Double> futureTB = CompletableFuture.supplyAsync(() -> priceOfTB());
+        CompletableFuture<Double> futureJD = CompletableFuture.supplyAsync(() -> priceOfJD());
 
         CompletableFuture.allOf(futureTM, futureTB, futureJD).join();
 
-        CompletableFuture.supplyAsync(()->priceOfTM())
+        CompletableFuture.supplyAsync(() -> priceOfTM())
                 .thenApply(String::valueOf)
-                .thenApply(str-> "price " + str)
+                .thenApply(str -> "price " + str)
                 .thenAccept(System.out::println);
 
 

@@ -6,7 +6,7 @@ package com.yuhaowin.juc.c26_01_threadpool;
 
 import java.util.concurrent.*;
 
-public class T06_00_Future {
+public class T04_Future {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		
 		FutureTask<Integer> task = new FutureTask<>(()->{
