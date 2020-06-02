@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class T10_ScheduledPool {
     public static void main(String[] args) {
+        // 定时任务
         ScheduledExecutorService service = Executors.newScheduledThreadPool(4);
         service.scheduleAtFixedRate(() -> {
             try {
