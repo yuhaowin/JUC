@@ -16,23 +16,20 @@ public class T12_ForkJoinPool {
         for (int i = 0; i < nums.length; i++) {
             nums[i] = r.nextInt(100);
         }
-
-        System.out.println("---" + Arrays.stream(nums).sum()); //stream api
+        System.out.println("单线程计算结果：" + Arrays.stream(nums).sum()); //stream api
     }
 
 
-    static class AddTask extends RecursiveAction {
-
+    static class AddAction extends RecursiveAction {
         int start, end;
 
-        AddTask(int s, int e) {
+        AddAction(int s, int e) {
             start = s;
             end = e;
         }
 
         @Override
         protected void compute() {
-
             if (end - start <= MAX_NUM) {
                 long sum = 0L;
                 for (int i = start; i < end; i++) sum += nums[i];
@@ -41,24 +38,20 @@ public class T12_ForkJoinPool {
 
                 int middle = start + (end - start) / 2;
 
-                AddTask subTask1 = new AddTask(start, middle);
-                AddTask subTask2 = new AddTask(middle, end);
-                subTask1.fork();
-                subTask2.fork();
+                AddAction subAction1 = new AddAction(start, middle);
+                AddAction subAction2 = new AddAction(middle, end);
+                subAction1.fork();
+                subAction2.fork();
             }
-
-
         }
-
     }
 
 
-    static class AddTaskRet extends RecursiveTask<Long> {
-
+    static class AddTask extends RecursiveTask<Long> {
         private static final long serialVersionUID = 1L;
         int start, end;
 
-        AddTaskRet(int s, int e) {
+        AddTask(int s, int e) {
             start = s;
             end = e;
         }
@@ -74,8 +67,8 @@ public class T12_ForkJoinPool {
 
             int middle = start + (end - start) / 2;
 
-            AddTaskRet subTask1 = new AddTaskRet(start, middle);
-            AddTaskRet subTask2 = new AddTaskRet(middle, end);
+            AddTask subTask1 = new AddTask(start, middle);
+            AddTask subTask2 = new AddTask(middle, end);
             subTask1.fork();
             subTask2.fork();
 
@@ -85,18 +78,13 @@ public class T12_ForkJoinPool {
     }
 
     public static void main(String[] args) throws IOException {
-		/*ForkJoinPool fjp = new ForkJoinPool();
-		AddTask task = new AddTask(0, nums.length);
-		fjp.execute(task);*/
+        ForkJoinPool pool = new ForkJoinPool();
+        pool.execute(new AddAction(0, nums.length));
 
-        T12_ForkJoinPool temp = new T12_ForkJoinPool();
+        AddTask task = new AddTask(0, nums.length);
+        pool.execute(task);
+        System.out.println("ForkJoinPool 计算结果：" + task.join());
 
-        ForkJoinPool fjp = new ForkJoinPool();
-        AddTaskRet task = new AddTaskRet(0, nums.length);
-        fjp.execute(task);
-        long result = task.join();
-        System.out.println(result);
-
-        //System.in.read();
+        System.in.read();
     }
 }

@@ -10,17 +10,14 @@ public class T13_ParallelStreamAPI {
         Random r = new Random();
         for (int i = 0; i < 10000; i++) nums.add(1000000 + r.nextInt(1000000));
 
-        //System.out.println(nums);
-
         long start = System.currentTimeMillis();
         nums.forEach(v -> isPrime(v));
         long end = System.currentTimeMillis();
         System.out.println(end - start);
 
         //使用parallel stream api
-
         start = System.currentTimeMillis();
-        nums.parallelStream().forEach(T13_ParallelStreamAPI::isPrime);
+        nums.parallelStream().forEach(v -> isPrime(v));
         end = System.currentTimeMillis();
 
         System.out.println(end - start);

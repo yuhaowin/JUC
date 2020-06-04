@@ -1,6 +1,5 @@
 package com.yuhaowin.juc.c26_01_threadpool;
 
-import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
