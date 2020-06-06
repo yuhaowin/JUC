@@ -1,4 +1,4 @@
-# JMH Java准测试工具套件
+# JMH Java 准测试工具套件
 
 ## 什么是JMH
 
@@ -10,7 +10,7 @@
 
 1. 创建Maven项目，添加依赖
 
-   ```
+   ```xml
    <?xml version="1.0" encoding="UTF-8"?>
    <project xmlns="http://maven.apache.org/POM/4.0.0"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -29,7 +29,6 @@
        <artifactId>HelloJMH2</artifactId>
        <version>1.0-SNAPSHOT</version>
    
-   
        <dependencies>
            <!-- https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core -->
            <dependency>
@@ -46,8 +45,6 @@
                <scope>test</scope>
            </dependency>
        </dependencies>
-   
-   
    </project>
    ```
 
@@ -94,21 +91,21 @@
 5. 写单元测试
 
    > 这个测试类一定要在test package下面
-   >
-   > ```java
-   > package com.yuhaowin.jmh;
-   > 
-   > import org.openjdk.jmh.annotations.Benchmark;
-   > 
-   > import static org.junit.jupiter.api.Assertions.*;
-   > 
-   > public class PSTest {
-   >     @Benchmark
-   >     public void testForEach() {
-   >         PS.foreach();
-   >     }
-   > }
-   > ```
+   
+    ```java
+    package com.yuhaowin.jmh;
+    
+    import org.openjdk.jmh.annotations.Benchmark;
+    
+    import static org.junit.jupiter.api.Assertions.*;
+    
+    public class PSTest {
+        @Benchmark
+        public void testForEach() {
+            PS.foreach();
+        }
+    }
+    ```
 
 6. 运行测试类，如果遇到下面的错误：
 
@@ -142,5 +139,6 @@
 ## Next
 
 官方样例：
+
 http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/
 

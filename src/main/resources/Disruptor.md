@@ -1,9 +1,5 @@
 # Disruptor
 
-作者：马士兵 http://www.mashibing.com
-
-最近更新：2019年10月22日
-
 ## 介绍
 
 主页：http://lmax-exchange.github.io/disruptor/
@@ -72,7 +68,7 @@ try {
 ## 使用EventTranslator发布事件
 
 ```
-//===============================================================
+        //===============================================================
         EventTranslator<LongEvent> translator1 = new EventTranslator<LongEvent>() {
             @Override
             public void translateTo(LongEvent event, long sequence) {
