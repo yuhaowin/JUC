@@ -8,14 +8,13 @@ import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) {
-        //ExecutorService executor = Executors.newCachedThreadPool();
 
         LongEventFactory factory = new LongEventFactory();
 
         //must be power of 2
         int ringBufferSize = 1024;
 
-        Disruptor<LongEvent> disruptor = new Disruptor<LongEvent>(factory, ringBufferSize, Executors.defaultThreadFactory());
+        Disruptor<LongEvent> disruptor = new Disruptor<>(factory, ringBufferSize, Executors.defaultThreadFactory());
 
         disruptor.handleEventsWith(new LongEventHandler());
 
@@ -25,13 +24,11 @@ public class Main {
 
         LongEventProducer producer = new LongEventProducer(ringBuffer);
 
-        ByteBuffer bb = ByteBuffer.allocate(8);
+        ByteBuffer buffer = ByteBuffer.allocate(8);
 
-        for(long l = 0; true; l++) {
-            bb.putLong(0, 1);
-
-            producer.onData(bb);
-
+        for (long l = 0; true; l++) {
+            buffer.putLong(0, 1);
+            producer.onData(buffer);
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
